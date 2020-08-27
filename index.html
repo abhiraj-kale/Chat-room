@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<style>
+.container-fluid{
+    display: flex;
+    flex-flow: column;
+}
+.head{
+    height: 30vh;
+    display: flex;
+    align-items: flex-end;
+    flex-flow: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.parent{
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.enter-link{
+    height: 25vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
+    flex-wrap: wrap;
+}
+</style>
+<body>
+    <div class="container-fluid">
+        <div class="head">
+            <h1>Chat-Room</h1>
+        </div>
+        <div class="parent">
+            <button id="create" class="btn btn-primary btn-lg">Create new Chat-room</button>            
+            <h3>OR</h3>
+        </div>
+        <div class="enter-link">
+           <h3>Enter the link:</h3> <input id="link-inp" type="text">
+           <button id="join-chat" class="btn btn-lg btn-primary">Join Chat-room</button>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        $(function () { 
+            const socket = io();
+            $('#create').on('click',function(e){
+                socket.emit('create-room');
+                socket.on('redirect-link',(msg)=>{
+                    window.location.href = window.location.href+msg.link;
+                })
+                e.preventDefault();
+            });
+            socket.emit('disconnect');
+        $('#join-chat').on('click',function(){
+            window.location.href = $('#link-inp').val(); 
+         });
+    })       
+ 
+    </script>
+</body>
+</html>
