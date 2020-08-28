@@ -121,7 +121,7 @@
                 $('#myModal').modal('show');
             });
             $('#myModal').modal({
-                backdrop: 'static',
+                backdrop: 'static', 
                 keyboard: false
             })
             function validate_name(e) {
@@ -149,7 +149,7 @@
                 $('#chat').append('<div class="sent"><b>You: </b>'+$('textarea').val()+'</div>');
                 $('textarea').val('');
                 $("#chat").scrollTop($("#chat")[0].scrollHeight);
-                
+                $('#send').attr('disabled',true);
                 return false;
             });
             socket.on('chat-message',function(msg){
