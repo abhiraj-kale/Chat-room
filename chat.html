@@ -86,7 +86,7 @@
                         <textarea class="form-control z-depth-1 flex-grow-1" id="exampleFormControlTextarea6" rows="1" placeholder="Write here..."></textarea>
                       </div>
                 </div>
-                <button type="button" id='send' class="btn btn-primary">Send</button>
+                <button type="button" id='send' class="btn btn-primary" disabled>Send</button>
             </div>
 
         </div>
@@ -99,13 +99,26 @@
             const name = prompt('Enter your name');
             var socket = io();
             socket.emit('has-joined',{name:name});
-            $('#chat').append('<div class="sent"><b>You have joined.</b></div>')
+            $('#chat').append('<div class="sent"><b>You have joined.</b></div>');
+
+            $('textarea').keyup(function(e){
+                if($(this).val().length ==1 &&  $(this).val()== ' '){
+                    $('#send').attr('disabled',true);
+                    $('textarea').val('');
+                }else if($(this).val()== ' ' || $(this).val()== ''){
+                    $('#send').attr('disabled',true);
+                }else if($(this).val().length != 0){
+                    $('#send').attr('disabled',false);
+                }
+            })
+
             $('#send').on('click',function(e){
                 e.preventDefault();
                 socket.emit('chat-message', {name:name,message:$('textarea').val()});
                 $('#chat').append('<div class="sent"><b>You: </b>'+$('textarea').val()+'</div>');
                 $('textarea').val('');
                 $("#chat").scrollTop($("#chat")[0].scrollHeight);
+                
                 return false;
             });
             socket.on('chat-message',function(msg){
