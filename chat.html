@@ -66,6 +66,13 @@
         resize: none;
         flex-grow: 0.10;
    }
+   .top-div{
+       width:100%;
+       display: flex;
+       flex-flow: row;
+       flex-wrap: wrap;
+       justify-content: space-evenly;
+   }
 </style>
 
 
@@ -92,10 +99,15 @@
 </div>
 
     <div id="parent" class="container-fluid row-md-12">
-        <div>
-            <label for="chat-box"><b>Chat room link-</b></label>           
-            <button id="copy-link" class="btn btn-sm btn-primary">Copy</button>
-        </div>
+        <div class="top-div">
+            <div>
+                <label for="chat-box"><b>Chat room link-</b></label>           
+                <button id="copy-link" class="btn btn-sm btn-primary">Copy</button>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary btn-sm float-right" onclick=' window.location.href = "chat-room-system.herokuapp.com/" ' value="Leave">
+            </div>
+              </div>
 <div id="chat-box" class="col-md-6 col-sm-12">
             <div id="chat" class="d-inline-flex flex-column justify-content-start">
 
