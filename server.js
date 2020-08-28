@@ -25,8 +25,8 @@ app.get('/room/:link',function(req,res){
         socket.to(req.params.link).broadcast.emit('chat-message',{name:msg.name,message:'User has joined'});
         })
         
-        socket.on('chat-message', function(msg){
-            socket.to(req.params.link).broadcast.emit('chat-message',msg);
+        socket.on('chatmessage', function(msg){
+            socket.to(req.params.link).broadcast.emit('chat-message',{name:msg.name,message:msg.message});
         })
     })
 })
