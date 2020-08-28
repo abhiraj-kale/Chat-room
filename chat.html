@@ -104,8 +104,8 @@
                 e.preventDefault();
                 socket.emit('chat-message', {name:name,message:$('textarea').val()});
                 $('#chat').append('<div class="sent"><b>You: </b>'+$('textarea').val()+'</div>');
-                $("#chat").scrollTop($("#mydiv")[0].scrollHeight);
                 $('textarea').val('');
+                $("#chat").scrollTop($("#chat")[0].scrollHeight);
                 return false;
             });
             socket.on('chat-message',function(msg){
