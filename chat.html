@@ -104,11 +104,13 @@
                 e.preventDefault();
                 socket.emit('chat-message', {name:name,message:$('textarea').val()});
                 $('#chat').append('<div class="sent"><b>You: </b>'+$('textarea').val()+'</div>');
+                $("#chat").scrollTop($("#mydiv")[0].scrollHeight);
                 $('textarea').val('');
                 return false;
             });
             socket.on('chat-message',function(msg){
                 $('#chat').append('<div class="received"><b>'+msg.name+': </b>'+msg.message+'</div>');
+                $("#chat").scrollTop($("#mydiv")[0].scrollHeight);
             })
             
             $('#copy-link').on('click',function(){
