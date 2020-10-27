@@ -10,7 +10,7 @@ https://chat-room-system.herokuapp.com/
 ~ download node.js <br>
 ~ download zip file from github and then extract it <br>
 ~ open command prompt and go to that extracted folder <br>
-~ type- npm i express, express-generator, nodemon, socket.io, uuid <br>
+~ type- npm i express, express-generator, nodemon, socket.io, uuid, body-parser -save <br>
 ~ type- npm i <br>
 ~ remove procfile from folder <br>
 ~ type- nodemon server.js <br>
